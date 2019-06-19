@@ -23,11 +23,24 @@ class PeopleController extends AppController {
             //                 ]],
             //               'order' => ['People.age' => 'desc']
             // ];
-            $condition = ['limit' => 2, 'page' => $find];
-            $data = $this->People->find('all', $condition);
+            // $condition = ['limit' => 2, 'page' => $find];
+            // $data = $this->People->find('all', $condition);
+            // findBy + Name
+            // $data = $this->People->findByNameOrMail($find, $find);
+            // $data = $this->People->find()->where(['name like' => $find]);
+            // $arr = explode(',', $find);
+            // $data = $this->People->find()
+            //     ->order(['People.age' => 'asc'])
+            //     ->order(['People.name' => 'asc'])
+            //     ->limit(3)->page($find);
+            $data = $this->People->find('me', ['me' => $find]);
         } else {
-            $data = $this->People->find('all',
-                ['order' => ['People.age' => 'asc']]);
+            // $data = $this->People->find('all',
+            //     ['order' => ['People.age' => 'asc']]);
+            // $data = $this->People->find()
+            //     ->order(['People.age' => 'asc'])
+            //     ->order(['People.name' => 'asc']);
+            $data = $this->People->find('byAge');
         }
         $this->set('data', $data);
     }
