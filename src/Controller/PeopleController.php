@@ -10,7 +10,25 @@ class PeopleController extends AppController {
     public function index() {
         // $id = $this->request->query['id'];
         // $data = $this->People->get($id);
-        $data = $this->People->find('all');
+        if ($this->request->is('post')) {
+            // フォームの入力内容がdata['People']['find']に入る
+            $find = $this->request->data['People']['find'];
+            // nameの値が$findのものを探す
+            // $condition = ['conditions' => ['name' => $find]];
+            // $condition = ['conditions' => ['name like' => $find]];
+            // $condition = ['conditions' => [
+            //                 'or' =>[
+            //                     'name like' => $find,
+            //                     'mail like' => $find
+            //                 ]],
+            //               'order' => ['People.age' => 'desc']
+            // ];
+            $condition = ['limit' => 2, 'page' => $find];
+            $data = $this->People->find('all', $condition);
+        } else {
+            $data = $this->People->find('all',
+                ['order' => ['People.age' => 'asc']]);
+        }
         $this->set('data', $data);
     }
 

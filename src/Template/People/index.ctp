@@ -1,4 +1,15 @@
 <p>This is People table records.</p>
+<?= $this->Form->create(null,
+    ['type' => 'post',
+     'url' => ['controller' => 'People',
+               'action' => 'index']])
+?>
+<div>find</div>
+<div><?= $this->Form->text('People.find') ?></div>
+<div><?= $this->Form->submit('検索') ?></div>
+<?= $this->Form->end() ?>
+
+<hr>
 <table>
 <thead>
     <tr>
@@ -6,6 +17,7 @@
         <th>name</th>
         <th>mail</th>
         <th>age</th>
+        <th></th>
     </tr>
 </thead>
 <?php foreach($data->toArray() as $obj): ?>
