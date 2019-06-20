@@ -33,14 +33,16 @@ class PeopleController extends AppController {
             //     ->order(['People.age' => 'asc'])
             //     ->order(['People.name' => 'asc'])
             //     ->limit(3)->page($find);
-            $data = $this->People->find('me', ['me' => $find]);
+            $data = $this->People->find('me', ['me' => $find])
+                ->contain(['Messages']);
         } else {
             // $data = $this->People->find('all',
             //     ['order' => ['People.age' => 'asc']]);
             // $data = $this->People->find()
             //     ->order(['People.age' => 'asc'])
             //     ->order(['People.name' => 'asc']);
-            $data = $this->People->find('byAge');
+            $data = $this->People->find('byAge')
+                ->contain(['Messages']);
         }
         $this->set('data', $data);
     }
