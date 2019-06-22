@@ -6,13 +6,28 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 class PeopleController extends AppController {
+
+    public $paginate = [
+        'finder' => 'byAge',
+        'limit' => 5,
+        // 'sort' => 'id',
+        // 'direction' => 'asc',
+        'contain' => ['Messages'],
+    ];
+
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
     
     public function index() {
+        // 5-18
+        $data = $this->paginate($this->People);
         // $id = $this->request->query['id'];
         // $data = $this->People->get($id);
-        if ($this->request->is('post')) {
+        // if ($this->request->is('post')) {
             // フォームの入力内容がdata['People']['find']に入る
-            $find = $this->request->data['People']['find'];
+            // $find = $this->request->data['People']['find'];
             // nameの値が$findのものを探す
             // $condition = ['conditions' => ['name' => $find]];
             // $condition = ['conditions' => ['name like' => $find]];
@@ -33,17 +48,17 @@ class PeopleController extends AppController {
             //     ->order(['People.age' => 'asc'])
             //     ->order(['People.name' => 'asc'])
             //     ->limit(3)->page($find);
-            $data = $this->People->find('me', ['me' => $find])
-                ->contain(['Messages']);
-        } else {
+        //     $data = $this->People->find('me', ['me' => $find])
+        //         ->contain(['Messages']);
+        // } else {
             // $data = $this->People->find('all',
             //     ['order' => ['People.age' => 'asc']]);
             // $data = $this->People->find()
             //     ->order(['People.age' => 'asc'])
             //     ->order(['People.name' => 'asc']);
-            $data = $this->People->find('byAge')
-                ->contain(['Messages']);
-        }
+        //     $data = $this->People->find('byAge')
+        //         ->contain(['Messages']);
+        // }
         $this->set('data', $data);
     }
 
