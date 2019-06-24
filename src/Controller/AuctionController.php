@@ -31,11 +31,11 @@ class AuctionController extends AuctionBaseController {
     // トップページ
     public function index() {
         // ページネーションでBiditemsを取得
-        $auction = $this->paginate('BIditems', [
+        $auction = $this->paginate('Biditems', [
             'order' => ['endtime' => 'desc'],
             'limit' => 10
         ]);
-        $this->set(compact('auction'));
+        $this->set(compact('auction'));// set('auction', $auction) ということ。compactだと複数いっぺんにも出来る
     }
 
     // 商品情報の表示
