@@ -7,7 +7,7 @@ use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Event\Event;
 
-class HelloController extends AppController {
+class AuctionBaseController extends AppController {
     public function initialize() {
         parent::initialize();
         // 各種コンポーネントのロード
