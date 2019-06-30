@@ -110,7 +110,7 @@ class AuctionController extends AuctionBaseController {
         $bidrequest->biditem_id = $biditem_id;
         $bidrequest->user_id = $this->Auth->user('id');
         // POST送信時の処理
-        if ($trequest->is('post')) {
+        if ($this->request->is('post')) {
             // $bidrequestに送信フォームの内容を反映する
             $bidrequest = $this->Bidrequests->patchEntity($bidrequest, $this->request->getData());
             // Bidrequestを保存
@@ -144,7 +144,7 @@ class AuctionController extends AuctionBaseController {
             }
         }
         try { // $bidinfo_idからBidinfoを取得する
-            $bidinfo = $this->Bidinfoget($bidinfo_id, ['contain' => ['Biditems']]);
+            $bidinfo = $this->Bidinfo->get($bidinfo_id, ['contain' => ['Biditems']]);
         } catch(Exception $e) {
             $bidinfo = null;
         }
